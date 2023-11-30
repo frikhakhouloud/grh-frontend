@@ -1,0 +1,38 @@
+
+<p-fieldset>
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center text-primary">
+            <span class="pi pi-user mr-2"></span>
+            <span class="font-bold text-lg"> Consultation GRH</span>
+        </div>
+    </ng-template>
+  
+
+
+
+
+<a routerLink="/addcollab">Nouveau Collaborateur</a>
+
+    <p-table [value]="collaborateurs">
+        <ng-template pTemplate="header">
+            <tr>
+                
+                <th>ID Collaborateur</th>
+                <th>Nom complet</th>
+                <th>Poste</th>
+                <th>Type contrat</th>
+                <th>Ancienneté</th>
+                <th>Actions</th>
+               
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-collaborateur>
+            <tr>
+                <td>{{ collaborateur.cin }}</td>
+                <td>{{ collaborateur.nom }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+
+</p-fieldset>
