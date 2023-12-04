@@ -1,171 +1,235 @@
-<p>add-collaborateur works!</p>
-<div class="grid">
-    <div class="col-12">
-        <div class="card px-6 py-6">
-            <p-toast></p-toast>
-            <p-toolbar styleClass="mb-4">
-                <ng-template pTemplate="left">
-                    <div class="my-2">
-                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
-                    </div>
-                </ng-template>
+<h2>Nouveau collaborateur</h2>
 
-                <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
-                </ng-template>
-            </p-toolbar>
+<p-panel header="Informations collaborateur">
+ 
 
-            <p-table #dt [value]="products" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
-                <ng-template pTemplate="caption">
-                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Manage Products</h5>
-                        <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
-                        </span>
+
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+    
+                              <!-- <form [formGroup]="formulaire" (ngSubmit)="onSubmit()" class="p-3 border rounded"> -->
+                                    <form [formGroup]="informations">
+                                    <div style='float:left; width:40%'>
+                                    <div class="col-lg-6">
+                                        <div class="p-fluid p-formgrid p-grid">
+                                            <div class="p-field p-col">
+                                            <label for="cin" class="form-label">Numéro CIN :</label>
+                                            <input type="text" id="cin" formControlName="cin" pInputText>
+                                            </div>
+                                            <div class="p-field p-col">
+                                            <label for="nomComplet" class="form-label">Nom complet :</label>
+                                            <input type="text" id="nomComplet" formControlName="nomComplet" pInputText>
+                                            </div>
+                                            <div class="p-field p-col">
+                                                <label for="numeroCompte" class="form-label">Numéro de compte :</label>
+                                                <input type="text" id="numeroCompte" formControlName="numeroCompte" pInputText>
+                                            </div>
+                                            <div class="p-field p-col">
+                                                <label for="numeroSecu" class="form-label">Numéro de sécurité sociale :</label>
+                                                <input type="text" id="numeroSecu" formControlName="numeroSecu" pInputText>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <div style='float:right; width: 40%'>
+                                    <div class="col-lg-6">
+                                        <div class="p-fluid p-formgrid p-grid">
+                                      <div class="p-field p-col">
+                                        <label for="dateNaissance" class="form-label">Date de naissance :</label>
+                                        <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar>
+                                    </div>
+                                    <div class="p-field p-col">
+                                        <label for="telephone" class="form-label">Téléphone :</label>
+                                        <input type="text" id="telephone" formControlName="telephone" pInputText>
+                                      </div>
+                                    <div class="p-field p-col">
+                                        <label for="adresse" class="form-label">Adresse :</label>
+                                        <input type="text" id="adresse" formControlName="adresse" pInputText>
+                                      </div>
+                                    <div class="p-field p-col">
+                                        <label for="email" class="form-label">Email :</label>
+                                        <input type="email" id="email" formControlName="email" pInputText>
+                                    </div>
+                                    </div>
+                                    </div>
+
+                                </div>
+                              </form>
+    
+                    </ng-template>
+                </p-toolbar>
+</p-panel>
+
+<p-panel header="Qualifications">
+      <p-toolbar styleClass="mb-4">   
+        <ng-template pTemplate="left">
+            <form [formGroup]="qualifications">
+                <div style='float:left; width:40%'>
+                    <div class="col-lg-6">
+                        <div class="p-fluid p-formgrid p-grid">
+                           
+                            <div class="p-field p-col">
+                                <label for="natureEtude" class="form-label">Nature d'étude :</label>
+                                <input type="text" id="natureEtude" formControlName="natureEtude" pInputText>
+                              </div>
+                              <div class="p-field p-col">
+                                <label for="certification" class="form-label">Certification :</label>
+                                <input type="text" id="certification" formControlName="certification" pInputText>
+                              </div>
+                        </div>
                     </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th>Image</th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-                        <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
-                        <th></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                        </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
-                            {{product.code || product.id}}
-                        </td>
-                        <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{product.name}}
-                        </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" />
-                        </td>
-                        <td style="width:14%; min-width:8rem;">
-                            <span class="p-column-title">Price</span>
-                            {{product.price | currency:'USD'}}
-                        </td>
-                        <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Category</span>
-                            {{product.category}}
-                        </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
-                            <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
-                        </td>
-                        <td>
-                            <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </div>
+                
+                <div style='float:right; width: 40%'>
+                    <div class="col-lg-6">
+                         <div class="p-fluid p-formgrid p-grid">
+           
+                            <div class="p-field p-col">
+                                <label for="niveauEtude" class="form-label">Niveau d'étude :</label>
+                                <p-dropdown [options]="niveauxEtude" formControlName="niveauEtude" placeholder="Sélectionnez un niveau"></p-dropdown>
                             </div>
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-
-        <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
-            <ng-template pTemplate="content">
-                <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.image">
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
-                </div>
-                <div class="field">
-                    <label for="description">Description</label>
-                    <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
-                </div>
-                <div class="field">
-                    <label for="status">Inventory Status</label>
-                    <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
-                        <ng-template pTemplate="selectedItem">
-                            <span *ngIf="product && product.inventoryStatus" [class]="'product-badge status-' + product.inventoryStatus.toString().toLowerCase()">{{product.inventoryStatus}}</span>
-                        </ng-template>
-                        <ng-template let-option pTemplate="item">
-                            <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-                        </ng-template>
-                    </p-dropdown>
-                </div>
-
-                <div class="field">
-                    <label class="mb-3">Category</label>
-                    <div class="formgrid grid">
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton>
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton>
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.category"></p-radioButton>
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.category"></p-radioButton>
-                            <label for="category4">Fitness</label>
+                            <div class="p-field p-col">
+                                <label for="anneeExperience" class="form-label">Années d'expérience :</label>
+                                <input type="text" id="anneeExperience" formControlName="anneeExperience" pInputText>
+                              </div>
                         </div>
                     </div>
                 </div>
+            </form>
+        </ng-template>
+    
+    </p-toolbar>
 
-                <div class="formgrid grid">
-                    <div class="field col">
-                        <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-                    </div>
-                    <div class="field col">
-                        <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
-                    </div>
+
+</p-panel>
+
+
+
+<p-panel header="Contrat">
+    <p-toolbar styleClass="mb-4">   
+      <ng-template pTemplate="left">
+          <form [formGroup]="contrat">
+              <div style='float:left; width:40%'>
+                  <div class="col-lg-6">
+                      <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col">
+                            <label for="contratType" class="form-label">Type contrat :</label>
+                            <p-dropdown [options]="contratType" formControlName="contratType" placeholder="Sélectionnez un type"></p-dropdown>
+                          </div>
+
+                          <div class="p-field p-col">
+                            <label for="avantagesSalaire" class="form-label">Avantages sur le salaire :</label>
+                            <p-dropdown [options]="avantagesSalaire" formControlName="avantagesSalaire" placeholder="Sélectionnez un avantage"></p-dropdown>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div style='float:right; width: 40%'>
+                  <div class="col-lg-6">
+                       <div class="p-fluid p-formgrid p-grid">
+         
+                        <div class="p-field p-col">
+                            <label for="salaireBase" class="form-label">Salaire de base :</label>
+                            <input type="text" id="salaireBase" formControlName="salaireBase" pInputText >  
+                        </div>
+
+                        <div class="p-field p-col">
+                            <label for="dateDebutContrat" class="form-label">Date de début de contrat :</label>
+                            <p-calendar id="dateDebutContrat" formControlName="dateDebutContrat" [showIcon]="true" dateFormat="dd/mm/yy" placeholder="Sélectionnez une date"></p-calendar>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </ng-template>
+  
+  </p-toolbar>
+</p-panel>
+
+
+<p-panel header="Grade">
+    <p-toolbar styleClass="mb-4">   
+        <ng-template pTemplate="left">
+            <form [formGroup]="grade">
+                <div style='float:left; width:40%'>
+                    <div class="col-lg-6">
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col">
+                                <label for="departement" class="form-label">Département :</label>
+                                <p-dropdown [options]="departement" formControlName="departement" placeholder="Sélectionnez un département"></p-dropdown>
+                              </div>
+                              <div class="p-field p-col">
+                                <label for="responsable" class="form-label">Responsable :</label>
+                                <p-dropdown [options]="responsable" formControlName="responsable" placeholder="Sélectionnez un responsable"></p-dropdown>
+                              </div>
+</div></div></div>
+<div style='float:right; width: 40%'>
+    <div class="col-lg-6">
+         <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="poste" class="form-label">Poste :</label>
+                <p-dropdown [options]="poste" formControlName="poste" placeholder="Sélectionnez un poste"></p-dropdown>
+              </div>
+            </div></div></div>
+            </form>
+        </ng-template>
+    </p-toolbar>
+</p-panel>
+
+
+
+<p-panel header="Pièces jointes">
+    <p-toolbar styleClass="mb-4">   
+        <ng-template pTemplate="left">
+            </ng-template></p-toolbar>
+</p-panel>
+
+<p-panel header="Autres informations">
+    <p-toolbar styleClass="mb-4">   
+        <ng-template pTemplate="left">
+            <form [formGroup]="autres">
+                <div style='float:left; width:40%'>
+                    <div class="col-lg-6">
+                        <div class="p-fluid p-formgrid p-grid">
+        
+            <div class="p-field p-col">
+                <label class="form-label">Recommandation :</label>
+                <div class="p-field-radiobutton">
+                  <div class="p-radio">
+                    <input type="radio" id="recommandation1" name="recommandation" value="Oui" formControlName="recommandation">
+                    <label for="recommandation1">Oui</label>
+                  </div>
+                  <div class="p-radio">
+                    <input type="radio" id="recommandation2" name="recommandation" value="Non" formControlName="recommandation">
+                    <label for="recommandation2">Non</label>
+                  </div>
                 </div>
-            </ng-template>
+              </div>
 
-            <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-            </ng-template>
-        </p-dialog>
-
-        <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="product">Are you sure you want to delete <b>{{product.name}}</b>?</span>
+              <div class="p-field p-col">
+                <label for="collaborateur" class="form-label">Collaborateur :</label>
+                <input type="text" id="collaborateur" formControlName="collaborateur" pInputText>
             </div>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
-            </ng-template>
-        </p-dialog>
+            </div></div></div>
 
-        <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span>Are you sure you want to delete selected products?</span>
-            </div>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
-            </ng-template>
-        </p-dialog>
-    </div>
-</div>
+            <div style='float:right; width: 40%'>
+                <div class="col-lg-6">
+                     <div class="p-fluid p-formgrid p-grid">
+
+                        <div class="p-field p-col">
+                            <label for="commentaire" class="form-label">Commentaire :</label>
+                            <textarea id="commentaire" formControlName="commentaire" pInputTextarea rows="5" cols="30"></textarea>
+                          </div>
+
+                        </div></div></div>
+</form>
+        </ng-template></p-toolbar>
+</p-panel>
+<button type="button" pButton label="Réinitialiser"  class="p-button-secondary"></button>
+
+ <button type="submit" pButton label="Enregistrer" [disabled]="!informations.valid" class="p-button-success"></button> 
+
+

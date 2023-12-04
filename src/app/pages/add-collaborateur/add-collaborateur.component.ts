@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Product } from 'src/app/demo/api/product';
 import { MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-collaborateur',
@@ -12,131 +10,89 @@ import { Table } from 'primeng/table';
 })
 export class AddCollaborateurComponent implements OnInit {
 
-  productDialog: boolean = false;
 
-    deleteProductDialog: boolean = false;
+    informations!: FormGroup; // Indication que 'formulaire' sera initialisé dans le constructeur
+    qualifications!: FormGroup;
+    contrat!: FormGroup;
+    grade!: FormGroup;
+    autres!: FormGroup;
+    date: Date | undefined;
 
-    deleteProductsDialog: boolean = false;
+    niveauxEtude = [
+        { label: 'Licence', value: 'Licence' },
+        { label: 'Master', value: 'Master' },
+        { label: 'Ingénieur', value: 'Ingénieur' },
+      ];
 
-    products: Product[] = [];
+    contratType = [
+        { label: 'SIVP', value: 'SIVP' },
+        { label: 'CDI', value: 'CDI' },
+        { label: 'CDD', value: 'CDD' },
+        { label: 'Stage', value: 'Stage' },
+      ];
 
-    product: Product = {};
+      avantagesSalaire = [
+        { label: 'Prime', value: 'Prime' },
+        { label: 'Tickets resto', value: 'Tickets resto' },
+      ];
 
-    selectedProducts: Product[] = [];
+      departement = [
+        { label: 'Informatique', value: 'Informatique' },
+    { label: 'Ressources humaines', value: 'Ressources humaines' },
+      ];
 
-    submitted: boolean = false;
+      poste = [
+        { label: 'développement', value: 'développement' },
+    { label: 'test et qualité', value: 'test et qualité' },
+    { label: 'Help Desk', value: 'Help Desk' },
+      ];
 
-    cols: any[] = [];
+      responsable = [
+        { label: 'Directeur RH', value: 'Directeur RH' },
+    { label: 'Directeur technique', value: 'Directeur technique' },
+      ];
 
-    statuses: any[] = [];
-
-    rowsPerPageOptions = [5, 10, 20];
-
-    constructor(private messageService: MessageService) { }
+    constructor(private formBuilder: FormBuilder) { }
 
     ngOnInit() {
+          this.informations = this.formBuilder.group({
+            nom: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            cin: ['', Validators.required],
+            dateNaissance: [null, Validators.required], 
+            adresse: ['', Validators.required], 
+            numeroCompte: ['', Validators.required], 
+            telephone: ['', Validators.required], 
+            numeroSecu: ['', Validators.required], 
+            niveauEtude: ['', Validators.required],
+            certification: [''],
+            natureEtude: [''],
+            anneeExperience: [''],   
+            contratType: ['', Validators.required],
+            salaireBase: [null],
+            avantagesSalaire: ['', Validators.required],
+            dateDebutContrat: [null],
+            departement: [''],
+            poste: [''],
+            responsable: [''],
+            recommandation: [''],
+            collaborateur: [''],
+            commentaire: [''],
+            
+          });
 
-        this.cols = [
-            { field: 'product', header: 'Product' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' }
-        ];
 
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
-        ];
-    }
-
-    openNew() {
-        this.product = {};
-        this.submitted = false;
-        this.productDialog = true;
-    }
-
-    deleteSelectedProducts() {
-        this.deleteProductsDialog = true;
-    }
-
-    editProduct(product: Product) {
-        this.product = { ...product };
-        this.productDialog = true;
-    }
-
-    deleteProduct(product: Product) {
-        this.deleteProductDialog = true;
-        this.product = { ...product };
-    }
-
-    confirmDeleteSelected() {
-        this.deleteProductsDialog = false;
-        this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        this.selectedProducts = [];
-    }
-
-    confirmDelete() {
-        this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.id !== this.product.id);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-        this.product = {};
-    }
-
-    hideDialog() {
-        this.productDialog = false;
-        this.submitted = false;
-    }
-
-    saveProduct() {
-        this.submitted = true;
-
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
-                // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-            } else {
-                this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-            }
-
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
         }
-    }
-
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
-            }
+  
+        onSubmit()
+         {
+         if (this.informations.valid) {
+            // Traitez les données du formulaire ici
+             console.log('Valeurs du formulaire:', this.informations.value);
+           } else {
+            // Gérer le cas où le formulaire n'est pas valide
+            // Par exemple, afficher des messages d'erreur
         }
 
-        return index;
-    }
-
-    createId(): string {
-        let id = '';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
-
-    onGlobalFilter(table: Table, event: Event) {
-        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-    }
+}
 }

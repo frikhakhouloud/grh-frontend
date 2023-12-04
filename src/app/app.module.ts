@@ -25,6 +25,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+
+
 @NgModule({
   
   declarations: [
@@ -55,7 +59,9 @@ import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collabo
     InputTextareaModule,
     DropdownModule,
     RadioButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    ReactiveFormsModule,
+    CalendarModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
