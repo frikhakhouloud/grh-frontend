@@ -1,0 +1,141 @@
+<p>ajout-collab works!</p>
+<p-panel header="Informations collaborateur">
+
+    <form [formGroup]="firstFormGroup">
+        
+                    <div class="p-field p-col">
+                        <label for="cin" class="form-label">Numéro CIN :</label>
+                        <input type="text" id="cin" formControlName="cin" pInputText>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <label for="nom" class="form-label">Nom complet :</label>
+                        <input type="text" id="nom" formControlName="nom" pInputText>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <label for="numCompte" class="form-label">Numéro de compte :</label>
+                        <input type="text" id="numCompte" formControlName="numCompte" pInputText>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <label for="numSecurite" class="form-label">Numéro de sécurité sociale :</label>
+                        <input type="text" id="numSecurite" formControlName="numSecurite" pInputText>
+                    </div>
+
+
+                       <div class="p-field p-col">
+                            <label for="dateNaissance" class="form-label">Date de naissance :</label>
+                            <p-calendar formControlName="dateNaissance"></p-calendar>
+                        </div>
+                         <div class="p-field p-col">
+                            <label for="telephone" class="form-label">Téléphone :</label>
+                            <input type="text" id="telephone" formControlName="telephone" pInputText>
+                        </div>
+                        <div class="p-field p-col">
+                            <label for="adresse" class="form-label">Adresse :</label>
+                            <input type="text" id="adresse" formControlName="adresse" pInputText>
+                        </div>
+                       <div class="p-field p-col">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email" id="email" formControlName="email" pInputText>
+                        </div>
+                        <div class="p-field p-col">
+                            <label for="natureEtude" class="form-label">Nature d'étude :</label>
+                            <input type="text" id="natureEtude" formControlName="natureEtude" pInputText>
+                        </div>
+<!-- 
+                        <div class="p-field p-col">
+                            <label for="niveauEtude" class="form-label">Niveau d'étude :</label>
+                            <select formControlName="niveauEtude" placeholder="Sélectionnez un niveau">
+                              <option *ngFor="let niveau of niveauxEtude" [ngValue]="niveau.niveauEtude">{{ niveau.niveauEtude }}</option>
+                            </select>
+                          </div> -->
+
+                          <DIV class="col-sm-10">
+                            <label for="natureEtude" class="form-label">Nature d'étude :</label>
+                            <select name="niveauEtude" class="form-control">
+                                <option>--select--</option>
+                                <option *ngFor="let niveau of niveauxEtude">
+                                    {{ niveau.niveauEtude }} 
+                                 </option>
+                            </select>
+
+                          </DIV>
+                         <!-- <div class="p-field p-col">
+                            <label for="niveauEtude" class="form-label">Niveau d'étude :</label>
+                            <p-dropdown [options]="niveauxEtude" formControlName="niveauEtude" placeholder="Sélectionnez un niveau"></p-dropdown>
+                        </div> -->
+
+                        <!-- <div class="p-field p-col">
+                            <label for="niveauEtude" class="form-label">Niveau d'étude :</label>
+                            <p-dropdown [options]="niveauxEtude" formControlName="niveauEtude" placeholder="Sélectionnez un niveau"></p-dropdown>
+                          </div> -->
+
+
+                         <div class="p-field p-col">
+                            <label for="anneeExperience" class="form-label">Années d'expérience :</label>
+                            <input type="text" id="anneeExperience" formControlName="anneeExperience" pInputText>
+                          </div>
+
+                          <div class="p-field p-col">
+                            <label for="contratType" class="form-label">Type contrat :</label>
+                            <p-dropdown [options]="contratType" formControlName="contratType" placeholder="Sélectionnez un type"></p-dropdown>
+                        </div>
+
+                        <div class="p-field p-col">
+                            <label for="avantagesSalaire" class="form-label">Avantages sur le salaire :</label>
+                            <p-dropdown [options]="avantagesSalaire" formControlName="avantagesSalaire" placeholder="Sélectionnez un avantage"></p-dropdown>
+                        </div>
+                        <div class="p-field p-col">
+                            <label for="salaireBase" class="form-label">Salaire de base :</label>
+                            <input type="text" id="salaireBase" formControlName="salaireBase" pInputText >  
+                        </div>
+
+                        <div class="p-field p-col">
+                            <label for="dateDebutContrat" class="form-label">Date de début de contrat :</label>
+                            <p-calendar id="dateDebutContrat" formControlName="dateDebutContrat" [showIcon]="true" dateFormat="dd/mm/yy" placeholder="Sélectionnez une date"></p-calendar>
+                        </div>
+
+                       <div class="p-field p-col">
+                            <label for="departement" class="form-label">Département :</label>
+                            <p-dropdown [options]="departement" formControlName="departement" placeholder="Sélectionnez un département"></p-dropdown>
+                      </div>
+                          <div class="p-field p-col">
+                            <label for="responsable" class="form-label">Responsable :</label>
+                            <p-dropdown [options]="responsable" formControlName="responsable" placeholder="Sélectionnez un responsable"></p-dropdown>
+                      </div>
+                     <!-- <div class="p-field p-col">
+                        <label for="poste" class="form-label">Poste :</label>
+                        <p-dropdown [options]="poste" formControlName="poste" placeholder="Sélectionnez un poste"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <label class="form-label">Recommandation :</label>
+                        <div class="p-field-radiobutton">
+                            <div class="p-radio">
+                                <input type="radio" id="recommandation1" name="recommandation" value="Oui" formControlName="recommandation">
+                                <label for="recommandation1">Oui</label>
+                            </div>
+                            <div class="p-radio">
+                                <input type="radio" id="recommandation2" name="recommandation" value="Non" formControlName="recommandation">
+                                <label for="recommandation2">Non</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-field p-col">
+                        <label for="collaborateur" class="form-label">Collaborateur :</label>
+                        <input type="text" id="collaborateur" formControlName="collaborateur" pInputText>
+                    </div>
+
+                    <div class="p-field p-col">
+                        <label for="commentaire" class="form-label">Commentaire :</label>
+                        <textarea id="commentaire" formControlName="commentaire" pInputTextarea rows="5" cols="30"></textarea>
+                    </div> -->
+
+
+</form>
+
+    <button type="submit" class="btn btn-primary">Enragistrer</button> <br/> <br/>
+
+</p-panel>

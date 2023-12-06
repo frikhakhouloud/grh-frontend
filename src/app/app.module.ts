@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { AjoutCollabComponent } from './pages/ajout-collab/ajout-collab.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { CalendarModule } from 'primeng/calendar';
     AppComponent,
     CollaborateurComponent,
     AddCollaborateurComponent,
+    AjoutCollabComponent,
   ],
   imports: [
     BrowserModule,

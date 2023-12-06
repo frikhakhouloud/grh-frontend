@@ -1,235 +1,374 @@
 <h2>Nouveau collaborateur</h2>
-
-<p-panel header="Informations collaborateur">
- 
-
-
-                <p-toolbar styleClass="mb-4">
-                    <ng-template pTemplate="left">
-    
-                              <!-- <form [formGroup]="formulaire" (ngSubmit)="onSubmit()" class="p-3 border rounded"> -->
-                                    <form [formGroup]="informations">
-                                    <div style='float:left; width:40%'>
-                                    <div class="col-lg-6">
-                                        <div class="p-fluid p-formgrid p-grid">
-                                            <div class="p-field p-col">
-                                            <label for="cin" class="form-label">Numéro CIN :</label>
-                                            <input type="text" id="cin" formControlName="cin" pInputText>
-                                            </div>
-                                            <div class="p-field p-col">
-                                            <label for="nomComplet" class="form-label">Nom complet :</label>
-                                            <input type="text" id="nomComplet" formControlName="nomComplet" pInputText>
-                                            </div>
-                                            <div class="p-field p-col">
-                                                <label for="numeroCompte" class="form-label">Numéro de compte :</label>
-                                                <input type="text" id="numeroCompte" formControlName="numeroCompte" pInputText>
-                                            </div>
-                                            <div class="p-field p-col">
-                                                <label for="numeroSecu" class="form-label">Numéro de sécurité sociale :</label>
-                                                <input type="text" id="numeroSecu" formControlName="numeroSecu" pInputText>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div style='float:right; width: 40%'>
-                                    <div class="col-lg-6">
-                                        <div class="p-fluid p-formgrid p-grid">
-                                      <div class="p-field p-col">
-                                        <label for="dateNaissance" class="form-label">Date de naissance :</label>
-                                        <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar>
-                                    </div>
-                                    <div class="p-field p-col">
-                                        <label for="telephone" class="form-label">Téléphone :</label>
-                                        <input type="text" id="telephone" formControlName="telephone" pInputText>
-                                      </div>
-                                    <div class="p-field p-col">
-                                        <label for="adresse" class="form-label">Adresse :</label>
-                                        <input type="text" id="adresse" formControlName="adresse" pInputText>
-                                      </div>
-                                    <div class="p-field p-col">
-                                        <label for="email" class="form-label">Email :</label>
-                                        <input type="email" id="email" formControlName="email" pInputText>
-                                    </div>
-                                    </div>
-                                    </div>
-
-                                </div>
-                              </form>
-    
-                    </ng-template>
-                </p-toolbar>
-</p-panel>
-
-<p-panel header="Qualifications">
-      <p-toolbar styleClass="mb-4">   
-        <ng-template pTemplate="left">
-            <form [formGroup]="qualifications">
-                <div style='float:left; width:40%'>
-                    <div class="col-lg-6">
-                        <div class="p-fluid p-formgrid p-grid">
-                           
-                            <div class="p-field p-col">
-                                <label for="natureEtude" class="form-label">Nature d'étude :</label>
-                                <input type="text" id="natureEtude" formControlName="natureEtude" pInputText>
-                              </div>
-                              <div class="p-field p-col">
-                                <label for="certification" class="form-label">Certification :</label>
-                                <input type="text" id="certification" formControlName="certification" pInputText>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style='float:right; width: 40%'>
-                    <div class="col-lg-6">
-                         <div class="p-fluid p-formgrid p-grid">
-           
-                            <div class="p-field p-col">
-                                <label for="niveauEtude" class="form-label">Niveau d'étude :</label>
-                                <p-dropdown [options]="niveauxEtude" formControlName="niveauEtude" placeholder="Sélectionnez un niveau"></p-dropdown>
-                            </div>
-                            <div class="p-field p-col">
-                                <label for="anneeExperience" class="form-label">Années d'expérience :</label>
-                                <input type="text" id="anneeExperience" formControlName="anneeExperience" pInputText>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </ng-template>
-    
-    </p-toolbar>
-
-
-</p-panel>
-
-
-
-<p-panel header="Contrat">
-    <p-toolbar styleClass="mb-4">   
+<form [formGroup]="informations">
+  <p-panel header="Informations collaborateur">
+    <p-toolbar styleClass="mb-4">
       <ng-template pTemplate="left">
-          <form [formGroup]="contrat">
-              <div style='float:left; width:40%'>
-                  <div class="col-lg-6">
-                      <div class="p-fluid p-formgrid p-grid">
-                        <div class="p-field p-col">
-                            <label for="contratType" class="form-label">Type contrat :</label>
-                            <p-dropdown [options]="contratType" formControlName="contratType" placeholder="Sélectionnez un type"></p-dropdown>
-                          </div>
-
-                          <div class="p-field p-col">
-                            <label for="avantagesSalaire" class="form-label">Avantages sur le salaire :</label>
-                            <p-dropdown [options]="avantagesSalaire" formControlName="avantagesSalaire" placeholder="Sélectionnez un avantage"></p-dropdown>
-                          </div>
-                      </div>
-                  </div>
+        <div style="float: left; width: 40%">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="cin" class="form-label">Numéro CIN :</label>
+                <input type="text" id="cin" formControlName="cin" pInputText />
               </div>
-              
-              <div style='float:right; width: 40%'>
-                  <div class="col-lg-6">
-                       <div class="p-fluid p-formgrid p-grid">
-         
-                        <div class="p-field p-col">
-                            <label for="salaireBase" class="form-label">Salaire de base :</label>
-                            <input type="text" id="salaireBase" formControlName="salaireBase" pInputText >  
-                        </div>
 
-                        <div class="p-field p-col">
-                            <label for="dateDebutContrat" class="form-label">Date de début de contrat :</label>
-                            <p-calendar id="dateDebutContrat" formControlName="dateDebutContrat" [showIcon]="true" dateFormat="dd/mm/yy" placeholder="Sélectionnez une date"></p-calendar>
-                          </div>
-                      </div>
-                  </div>
+              <div class="p-field p-col">
+                <label for="nomComplet" class="form-label">Nom complet :</label>
+                <input
+                  type="text"
+                  id="nomComplet"
+                  formControlName="nom"
+                  pInputText
+                />
               </div>
-          </form>
+
+              <div class="p-field p-col">
+                <label for="numeroCompte" class="form-label"
+                  >Numéro de compte :</label
+                >
+                <input
+                  type="text"
+                  id="numeroCompte"
+                  formControlName="numeroCompte"
+                  pInputText
+                />
+              </div>
+
+              <div class="p-field p-col">
+                <label for="numeroSecu" class="form-label"
+                  >Numéro de sécurité sociale :</label
+                >
+                <input
+                  type="text"
+                  id="numeroSecu"
+                  formControlName="numeroSecu"
+                  pInputText
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="float: right; width: 40%; margin-left: 80px">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="dateNaissance" class="form-label"
+                  >Date de naissance :</label
+                >
+                <!-- <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar> -->
+                <p-calendar formControlName="date"></p-calendar>
+              </div>
+              <div class="p-field p-col">
+                <label for="telephone" class="form-label">Téléphone :</label>
+                <input
+                  type="text"
+                  id="telephone"
+                  formControlName="telephone"
+                  pInputText
+                />
+              </div>
+              <div class="p-field p-col">
+                <label for="adresse" class="form-label">Adresse :</label>
+                <input
+                  type="text"
+                  id="adresse"
+                  formControlName="adresse"
+                  pInputText
+                />
+              </div>
+              <div class="p-field p-col">
+                <label for="email" class="form-label">Email :</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  pInputText
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </ng-template>
-  
-  </p-toolbar>
-</p-panel>
-
-
-<p-panel header="Grade">
-    <p-toolbar styleClass="mb-4">   
-        <ng-template pTemplate="left">
-            <form [formGroup]="grade">
-                <div style='float:left; width:40%'>
-                    <div class="col-lg-6">
-                        <div class="p-fluid p-formgrid p-grid">
-                            <div class="p-field p-col">
-                                <label for="departement" class="form-label">Département :</label>
-                                <p-dropdown [options]="departement" formControlName="departement" placeholder="Sélectionnez un département"></p-dropdown>
-                              </div>
-                              <div class="p-field p-col">
-                                <label for="responsable" class="form-label">Responsable :</label>
-                                <p-dropdown [options]="responsable" formControlName="responsable" placeholder="Sélectionnez un responsable"></p-dropdown>
-                              </div>
-</div></div></div>
-<div style='float:right; width: 40%'>
-    <div class="col-lg-6">
-         <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="poste" class="form-label">Poste :</label>
-                <p-dropdown [options]="poste" formControlName="poste" placeholder="Sélectionnez un poste"></p-dropdown>
-              </div>
-            </div></div></div>
-            </form>
-        </ng-template>
     </p-toolbar>
-</p-panel>
+  </p-panel>
+
+  <p-panel header="Qualifications">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <div style="float: left; width: 40%">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="natureEtude" class="form-label"
+                  >Nature d'étude :</label
+                >
+                <input
+                  type="text"
+                  id="natureEtude"
+                  formControlName="natureEtude"
+                  pInputText
+                />
+              </div>
+              <div class="p-field p-col">
+                <label for="certification" class="form-label"
+                  >Certification :</label
+                >
+                <input
+                  type="text"
+                  id="certification"
+                  formControlName="certification"
+                  pInputText
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="float: right; width: 40%; margin-left: 80px">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="niveauEtude" class="form-label"
+                  >Niveau d'étude :</label
+                >
+                <p-dropdown
+                  [options]="niveauEtude"
+                  formControlName="niveauEtude"
+                  optionLabel="niveauEtude"
+                  placeholder="Sélectionnez un niveau"
+                ></p-dropdown>
+              </div>
 
 
 
-<p-panel header="Pièces jointes">
-    <p-toolbar styleClass="mb-4">   
-        <ng-template pTemplate="left">
-            </ng-template></p-toolbar>
-</p-panel>
+              
+         
+              <div class="p-field p-col">
+                <label for="anneeExperience" class="form-label"
+                  >Années d'expérience :</label
+                >
+                <input
+                  type="text"
+                  id="anneeExperience"
+                  formControlName="anneeExperience"
+                  pInputText
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-toolbar>
+  </p-panel>
 
-<p-panel header="Autres informations">
-    <p-toolbar styleClass="mb-4">   
-        <ng-template pTemplate="left">
-            <form [formGroup]="autres">
-                <div style='float:left; width:40%'>
-                    <div class="col-lg-6">
-                        <div class="p-fluid p-formgrid p-grid">
-        
-            <div class="p-field p-col">
+  <p-panel header="Contrat">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <div style="float: left; width: 40%">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="contratType" class="form-label"
+                  >Type contrat :</label
+                >
+                <p-dropdown
+                  [options]="contratType"
+                  formControlName="contratType"
+                  optionLabel="type"
+                  placeholder="Sélectionnez un type"
+                ></p-dropdown>
+              </div>
+
+              <div class="p-field p-col">
+                <label for="avantagesSalaire" class="form-label"
+                  >Avantages sur le salaire :</label
+                >
+                <p-dropdown
+                  [options]="avantagesSalaire"
+                  formControlName="avantagesSalaire"
+                  optionLabel="avantage"
+                  placeholder="Sélectionnez un avantage"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="float: right; width: 40%; margin-left: 80px">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="salaireBase" class="form-label"
+                  >Salaire de base :</label
+                >
+                <input
+                  type="text"
+                  id="salaireBase"
+                  formControlName="salaireBase"
+                  pInputText
+                />
+              </div>
+
+              <div class="p-field p-col">
+                <label for="dateDebutContrat" class="form-label"
+                  >Date de début de contrat :</label
+                >
+                <p-calendar
+                  id="dateDebutContrat"
+                  formControlName="dateDebutContrat"
+                  [showIcon]="true"
+                  dateFormat="dd/mm/yy"
+                  placeholder="Sélectionnez une date"
+                ></p-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-toolbar>
+  </p-panel>
+
+  <p-panel header="Grade">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <div style="float: left; width: 40%">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="departement" class="form-label"
+                  >Département :</label
+                >
+                <p-dropdown
+                  [options]="departement"
+                  formControlName="departement"
+                  optionLabel="nomDepartament"
+                  placeholder="Sélectionnez un département"
+                ></p-dropdown>
+                <!-- <p-dropdown [options]="departement" formControlName="departement" placeholder="Sélectionnez un département"
+                                    (onChange)="onDepartementChange($event)"></p-dropdown> -->
+              </div>
+              <div class="p-field p-col">
+                <label for="responsable" class="form-label"
+                  >Responsable :</label
+                >
+                <p-dropdown
+                  [options]="responsable"
+                  formControlName="responsable"
+                  optionLabel="nomResponsable"
+                  placeholder="Sélectionnez un responsable"
+                ></p-dropdown>
+                <!-- <p-dropdown [options]="avantagesSalaire" formControlName="avantagesSalaire" optionLabel="avantage" placeholder="Sélectionnez un avantage"></p-dropdown> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="float: right; width: 40%; margin-left: 80px">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="poste" class="form-label">Poste :</label>
+                <p-dropdown
+                  [options]="poste"
+                  formControlName="poste"
+                  placeholder="Sélectionnez un poste"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-toolbar>
+  </p-panel>
+
+  <p-panel header="Pièces jointes">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left"> </ng-template>
+    </p-toolbar>
+  </p-panel>
+
+  <p-panel header="Autres informations">
+    <p-toolbar styleClass="mb-4">
+      <ng-template pTemplate="left">
+        <div style="float: left; width: 40%">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
                 <label class="form-label">Recommandation :</label>
                 <div class="p-field-radiobutton">
                   <div class="p-radio">
-                    <input type="radio" id="recommandation1" name="recommandation" value="Oui" formControlName="recommandation">
+                    <input
+                      type="radio"
+                      id="recommandation1"
+                      name="recommandation"
+                      value="Oui"
+                      formControlName="recommandation"
+                    />
                     <label for="recommandation1">Oui</label>
                   </div>
                   <div class="p-radio">
-                    <input type="radio" id="recommandation2" name="recommandation" value="Non" formControlName="recommandation">
+                    <input
+                      type="radio"
+                      id="recommandation2"
+                      name="recommandation"
+                      value="Non"
+                      formControlName="recommandation"
+                    />
                     <label for="recommandation2">Non</label>
                   </div>
                 </div>
               </div>
 
               <div class="p-field p-col">
-                <label for="collaborateur" class="form-label">Collaborateur :</label>
-                <input type="text" id="collaborateur" formControlName="collaborateur" pInputText>
+                <label for="collaborateur" class="form-label"
+                  >Collaborateur :</label
+                >
+                <input
+                  type="text"
+                  id="collaborateur"
+                  formControlName="collaborateur"
+                  pInputText
+                />
+              </div>
             </div>
-            </div></div></div>
+          </div>
+        </div>
 
-            <div style='float:right; width: 40%'>
-                <div class="col-lg-6">
-                     <div class="p-fluid p-formgrid p-grid">
+        <div style="float: right; width: 40%; margin-left: 100px">
+          <div class="col-lg-6">
+            <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col">
+                <label for="commentaire" class="form-label"
+                  >Commentaire :</label
+                >
+                <textarea
+                  id="commentaire"
+                  formControlName="commentaire"
+                  pInputTextarea
+                  rows="5"
+                  cols="30"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-toolbar>
+  </p-panel>
 
-                        <div class="p-field p-col">
-                            <label for="commentaire" class="form-label">Commentaire :</label>
-                            <textarea id="commentaire" formControlName="commentaire" pInputTextarea rows="5" cols="30"></textarea>
-                          </div>
+  <button
+    type="button"
+    pButton
+    label="Réinitialiser"
+    class="p-button-secondary"
+  ></button>
 
-                        </div></div></div>
+  <button
+    type="submit"
+    pButton
+    label="Enregistrer"
+    [disabled]="!informations.valid"
+    class="p-button-success"
+  ></button>
+
+  <button input type="reset" class="btn btn-primary" (submit)="ajout()">Ajouter un collaborateur</button>
 </form>
-        </ng-template></p-toolbar>
-</p-panel>
-<button type="button" pButton label="Réinitialiser"  class="p-button-secondary"></button>
-
- <button type="submit" pButton label="Enregistrer" [disabled]="!informations.valid" class="p-button-success"></button> 
-
-
