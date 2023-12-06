@@ -51,23 +51,22 @@ export class AddCollaborateurComponent implements OnInit {
 
   createForm(): void {
       this.informations = this.formBuilder.group({
-          // niveauEtude: ['',],
-          nom: ['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          cin: ['', Validators.required],
-          dateNaissance: [null, Validators.required],
-          adresse: ['', Validators.required],
-          numeroCompte: ['', Validators.required],
-          telephone: ['', Validators.required],
-          numeroSecu: ['', Validators.required],
+        cin: ['', Validators.required],
+        nom: ['', Validators.required],
+        numCompte: ['', Validators.required],
+        numSecSocial: ['', Validators.required],
+        telephone: ['', Validators.required],
+        dateNaissance: [null, ],
+        email: ['', [Validators.required, Validators.email]],
+        adresse: ['', Validators.required],
+        natureEtude: [''],
+        certification: [''],
+        anneeExperience: [''],
+
           niveauEtude: [''],
-          //niveauEtude: ['', Validators.required],
-          certification: [''],
-          natureEtude: [''],
-          anneeExperience: [''],
-          contratType: ['', Validators.required],
+          contratType: ['', ],
           salaireBase: [null],
-          avantagesSalaire: ['', Validators.required],
+          avantagesSalaire: ['',],
           dateDebutContrat: [null],
           departement: [''],
           poste: [''],
@@ -128,17 +127,24 @@ export class AddCollaborateurComponent implements OnInit {
 
 
 
-  onSubmit() {
+
+
+  onSubmit(): void {
+    console.log('Tentative de soumission du formulaire...');
     if (this.informations.valid) {
-      // Traitez les données du formulaire ici
-      console.log('Valeurs du formulaire:', this.informations.value);
+      const formData = this.informations.value;
+      console.log('Données du formulaire:', formData); 
+      this.colService.ajouterCollaborateur(formData)
+        .subscribe((response) => {
+          console.log('Collaborateur ajouté avec succès:', response);
+        }, (error) => {
+          console.error('Erreur lors de l\'ajout du collaborateur:', error);
+        });
     } else {
-      // Gérer le cas où le formulaire n'est pas valide
-      // Par exemple, afficher des messages d'erreur
+      console.log('Formulaire invalide, vérifiez les champs.');
     }
   }
-  ajout(){
-    
-  }
+
+ 
 
 }

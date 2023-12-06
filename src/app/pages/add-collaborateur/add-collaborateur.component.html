@@ -1,5 +1,5 @@
 <h2>Nouveau collaborateur</h2>
-<form [formGroup]="informations">
+<form [formGroup]="informations" (ngSubmit)="onSubmit()">
   <p-panel header="Informations collaborateur">
     <p-toolbar styleClass="mb-4">
       <ng-template pTemplate="left">
@@ -28,7 +28,7 @@
                 <input
                   type="text"
                   id="numeroCompte"
-                  formControlName="numeroCompte"
+                  formControlName="numCompte"
                   pInputText
                 />
               </div>
@@ -40,7 +40,7 @@
                 <input
                   type="text"
                   id="numeroSecu"
-                  formControlName="numeroSecu"
+                  formControlName="numSecSocial"
                   pInputText
                 />
               </div>
@@ -55,8 +55,7 @@
                 <label for="dateNaissance" class="form-label"
                   >Date de naissance :</label
                 >
-                <!-- <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar> -->
-                <p-calendar formControlName="date"></p-calendar>
+                <p-calendar formControlName="dateNaissance"></p-calendar>
               </div>
               <div class="p-field p-col">
                 <label for="telephone" class="form-label">Téléphone :</label>
@@ -139,10 +138,6 @@
                 ></p-dropdown>
               </div>
 
-
-
-              
-         
               <div class="p-field p-col">
                 <label for="anneeExperience" class="form-label"
                   >Années d'expérience :</label
@@ -169,8 +164,7 @@
             <div class="p-fluid p-formgrid p-grid">
               <div class="p-field p-col">
                 <label for="contratType" class="form-label"
-                  >Type contrat :</label
-                >
+                  >Type contrat :</label>
                 <p-dropdown
                   [options]="contratType"
                   formControlName="contratType"
@@ -181,8 +175,7 @@
 
               <div class="p-field p-col">
                 <label for="avantagesSalaire" class="form-label"
-                  >Avantages sur le salaire :</label
-                >
+                  >Avantages sur le salaire :</label>
                 <p-dropdown
                   [options]="avantagesSalaire"
                   formControlName="avantagesSalaire"
@@ -199,8 +192,7 @@
             <div class="p-fluid p-formgrid p-grid">
               <div class="p-field p-col">
                 <label for="salaireBase" class="form-label"
-                  >Salaire de base :</label
-                >
+                  >Salaire de base :</label>
                 <input
                   type="text"
                   id="salaireBase"
@@ -257,7 +249,6 @@
                   optionLabel="nomResponsable"
                   placeholder="Sélectionnez un responsable"
                 ></p-dropdown>
-                <!-- <p-dropdown [options]="avantagesSalaire" formControlName="avantagesSalaire" optionLabel="avantage" placeholder="Sélectionnez un avantage"></p-dropdown> -->
               </div>
             </div>
           </div>
@@ -355,20 +346,19 @@
     </p-toolbar>
   </p-panel>
 
-  <button
+  <!-- <button
     type="button"
     pButton
     label="Réinitialiser"
     class="p-button-secondary"
-  ></button>
-
-  <button
+  ></button> -->
+ 
+  <!-- <button
     type="submit"
     pButton
     label="Enregistrer"
     [disabled]="!informations.valid"
-    class="p-button-success"
-  ></button>
-
-  <button input type="reset" class="btn btn-primary" (submit)="ajout()">Ajouter un collaborateur</button>
+    class="p-button-success" 
+  ></button> -->
+  <button type="submit">Enregistrer</button>
 </form>

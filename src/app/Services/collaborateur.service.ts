@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class CollaborateurService {
 private baseUrl = 'http://localhost:8081';
+private apiUrl = 'http://localhost:8081/Collaborateurs/add'; // Votre URL
+
   constructor(private http:HttpClient) { }
 
 
@@ -25,4 +27,8 @@ getAvantage(): Observable<any> {
  getResponsable(): Observable<any> {
   return this.http.get(`${this.baseUrl}/Responsable/GetAll`);
  }
+ ajouterCollaborateur(data: any) {
+  return this.http.post(this.apiUrl, data);
+}
+
 }
