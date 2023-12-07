@@ -143,6 +143,7 @@ export class AddCollaborateurComponent implements OnInit {
     } else {
       console.log('Formulaire invalide, vérifiez les champs.');
     }
+    this.ngOnInit();
   }
 
  
