@@ -21,7 +21,7 @@ export class AddCollaborateurComponent implements OnInit {
   avantagesSalaire: any[]= [''];
   departement :any[]= [''];
   responsable :any[]= [''];
-  poste :any 
+  poste :any
 
 
   constructor(
@@ -38,13 +38,15 @@ export class AddCollaborateurComponent implements OnInit {
     this.getAvantage();
     this.getDepartement();
     this.getResponsable();
+    this.getPoste();
+
    
   
-    this.poste = [
-      { label: 'développement', value: 'développement' },
-      { label: 'test et qualité', value: 'test et qualité' },
-      { label: 'Help Desk', value: 'Help Desk' },
-    ];
+    // this.poste = [
+    //   { label: 'développement', value: 'développement' },
+    //   { label: 'test et qualité', value: 'test et qualité' },
+    //   { label: 'Help Desk', value: 'Help Desk' },
+    // ];
   }
 
 
@@ -108,6 +110,11 @@ export class AddCollaborateurComponent implements OnInit {
     this.colService
       .getResponsable()
       .subscribe((data) => (this.responsable = data));
+  }
+  getPoste() {
+    this.colService
+      .getPoste()
+      .subscribe((data) => (this.poste = data));
   }
 
   // onDepartementChange(event: any) {

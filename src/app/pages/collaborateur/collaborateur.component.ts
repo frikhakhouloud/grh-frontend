@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CollaborateurService } from 'src/app/Services/collaborateur.service';
+
 @Component({
   selector: 'app-collaborateur',
   templateUrl: './collaborateur.component.html',
@@ -16,16 +18,17 @@ export class CollaborateurComponent implements OnInit {
     { status: 'Terminé', date: '2023-11-20' },
     { status: 'À venir', date: '2023-12-01' },
   ];
-  products: any[] = [
-    { code: '001', name: 'Product 1', category: 'Category A', quantity: 10 },
-    { code: '002', name: 'Product 2', category: 'Category B', quantity: 20 },
-  ];
-  constructor(private http: HttpClient) { 
+
+  constructor(private http: HttpClient,     private colService: CollaborateurService
+    ) { 
     this.collaborateurs = [];
   }
 
   ngOnInit(): void {
 
+    this.getAllCollaborateurs();
+  }
+  getAllCollaborateurs(){
     this.http.get<any[]>('http://localhost:8081/Collaborateurs/GetAll').subscribe(
       (data) => {
         this.collaborateurs = data;
@@ -35,5 +38,20 @@ export class CollaborateurComponent implements OnInit {
         console.error('Erreur lors de la récupération des collaborateurs :', error);
       }
     );
+
   }
+
+
+
+  supprimerCollaborateur(id: number): void {
+    this.colService.deleteCollaborateur(id)
+      .subscribe(() => {
+        console.log('Collaborateur supprimé avec succès');
+        this.getAllCollaborateurs();
+      }, (error) => {
+        console.error('Erreur lors de la suppression du collaborateur : ', error);
+      });
+  }
+
+ 
 }

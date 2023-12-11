@@ -8,7 +8,7 @@
             <div class="p-fluid p-formgrid p-grid">
               <div class="p-field p-col">
                 <label for="cin" class="form-label">Numéro CIN :</label>
-                <input type="number" id="cin" formControlName="cin" pInputText />
+                <input type="number" id="cin" formControlName="cin" pInputText pattern="[0-9]{8}" title="Le CIN doit contenir exactement 8 chiffres" required/>
               </div>
 
               <div class="p-field p-col">
@@ -205,7 +205,7 @@
                 <label for="dateDebutContrat" class="form-label"
                   >Date de début de contrat :</label
                 >
-                <p-calendar
+                <p-calendar  
                   id="dateDebutContrat"
                   formControlName="dateDebutContrat"
                   [showIcon]="true"
@@ -261,6 +261,7 @@
                 <p-dropdown
                   [options]="poste"
                   formControlName="poste"
+                  optionLabel="poste"
                   placeholder="Sélectionnez un poste"
                 ></p-dropdown>
               </div>
@@ -360,5 +361,10 @@
     [disabled]="!informations.valid"
     class="p-button-success" 
   ></button> -->
-  <button type="submit">Enregistrer</button>
+  <!-- <button type="submit">Enregistrer</button> -->
+  <button pButton pRipple type="button" label="Initialiser" class="p-button-secondary"></button>
+  <p-button label="Submit">Enregistrer</p-button>
+
+  <p-button label="Enregistrer"></p-button>
+
 </form>

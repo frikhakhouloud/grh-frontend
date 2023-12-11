@@ -27,8 +27,16 @@ getAvantage(): Observable<any> {
  getResponsable(): Observable<any> {
   return this.http.get(`${this.baseUrl}/Responsable/GetAll`);
  }
+ getPoste(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/Poste/GetAll`);
+ }
  ajouterCollaborateur(data: any) {
   return this.http.post(this.apiUrl, data);
+}
+
+deleteCollaborateur(id: number): Observable<void> {
+  const url = `${this.baseUrl}/Collaborateurs/Delete/${id}`;
+  return this.http.delete<void>(url);
 }
 
 }

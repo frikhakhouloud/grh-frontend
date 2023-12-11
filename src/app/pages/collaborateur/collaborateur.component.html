@@ -10,9 +10,7 @@
 
 
 
-    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-
-<a routerLink="/addcollab">Nouveau Collaborateur</a>
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" routerLink="/addcollab"></button>
 
     <p-table [value]="collaborateurs">
         <ng-template pTemplate="header">
@@ -20,7 +18,7 @@
                 
                 <th>CIN </th>
                 <th>Nom complet</th>
-                <th>Poste</th>
+               <th>Poste</th>
                 <th>Type contrat</th>
                 <th>Ancienneté</th>
                 <th>Actions</th>
@@ -31,6 +29,15 @@
             <tr>
                 <td>{{ collaborateur.cin }}</td>
                 <td>{{ collaborateur.nom }}</td>
+                <td>{{ collaborateur.poste.poste }}</td>
+                <td>{{ collaborateur.contratType.type }}</td>
+                <td>{{ collaborateur.anneeExperience}}</td>
+                <td>
+                    <button pButton pRipple type="button" label="Afficher" class="p-button-text"></button>
+                    <button pButton pRipple type="button" label="Modifier" class="p-button-warning p-button-text"></button>
+                    <button pButton pRipple type="button" label="Supprimer" class="p-button-danger p-button-text" (click)="supprimerCollaborateur(collaborateur.id)"></button>
+
+                </td>
             </tr>
         </ng-template>
     </p-table>
