@@ -39,4 +39,14 @@ deleteCollaborateur(id: number): Observable<void> {
   return this.http.delete<void>(url);
 }
 
+  getAllCollaborateurs(): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}/Collaborateurs/GetAll`);
+  }
+  getAllCollaborateursDto(): Observable<any> {
+
+    return this.http.get(`${this.baseUrl}/Collaborateurs/GetAllDto`);
+  }
+ 
+  
 }

@@ -12,30 +12,30 @@
 
     <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" routerLink="/addcollab"></button>
 
-    <p-table [value]="collaborateurs">
+    <p-table [value]="collaborateursDto">
         <ng-template pTemplate="header">
             <tr>
                 
-                <th>CIN </th>
+                <th>Id </th>
                 <th>Nom complet</th>
                <th>Poste</th>
-                <th>Type contrat</th>
+               <th>Type contrat</th>
                 <th>Ancienneté</th>
                 <th>Actions</th>
                
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-collaborateur>
+        <ng-template pTemplate="body" let-collaborateursDto>
             <tr>
-                <td>{{ collaborateur.cin }}</td>
-                <td>{{ collaborateur.nom }}</td>
-                <td>{{ collaborateur.poste.poste }}</td>
-                <td>{{ collaborateur.contratType.type }}</td>
-                <td>{{ collaborateur.anneeExperience}}</td>
+                <td>{{ collaborateursDto.id }}</td>
+                <td>{{ collaborateursDto.nom }}</td>
+                <td>{{ collaborateursDto.poste }}</td>
+                <td>{{ collaborateursDto.type}}</td>
+                <td>{{ collaborateursDto.anneeExperience}}</td>
                 <td>
                     <button pButton pRipple type="button" label="Afficher" class="p-button-text"></button>
                     <button pButton pRipple type="button" label="Modifier" class="p-button-warning p-button-text"></button>
-                    <button pButton pRipple type="button" label="Supprimer" class="p-button-danger p-button-text" (click)="supprimerCollaborateur(collaborateur.id)"></button>
+                    <button pButton pRipple type="button" label="Supprimer" class="p-button-danger p-button-text" (click)="supprimerCollaborateur(collaborateursDto.id)"></button>
 
                 </td>
             </tr>
