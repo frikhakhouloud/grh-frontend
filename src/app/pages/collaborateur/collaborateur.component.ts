@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CollaborateurService } from 'src/app/Services/collaborateur.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-collaborateur',
   templateUrl: './collaborateur.component.html',
-  styleUrls: ['./collaborateur.component.css']
+  styleUrls: ['./collaborateur.component.css'],
+  providers: [MessageService]
 })
 
 export class CollaborateurComponent implements OnInit {
@@ -20,7 +22,7 @@ export class CollaborateurComponent implements OnInit {
     { status: 'À venir', date: '2023-12-01' },
   ];
 
-  constructor(private http: HttpClient,     private colService: CollaborateurService
+  constructor(private http: HttpClient,private messageService:MessageService,     private colService: CollaborateurService
     ) { 
     // this.collaborateurs = [];
     this.collaborateursDto = [];
@@ -66,6 +68,8 @@ export class CollaborateurComponent implements OnInit {
   supprimerCollaborateur(id: number): void {
     this.colService.deleteCollaborateur(id)
       .subscribe(() => {
+      this.messageService.add({ severity: 'warn', summary: 'Successful', detail: 'Collaborateur is deleted', life: 4000 });
+
         console.log('Collaborateur supprimé avec succès');
         this.getAllCollaborateursDto();
       }, (error) => {
