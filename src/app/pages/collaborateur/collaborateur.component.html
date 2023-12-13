@@ -6,11 +6,31 @@
             <span class="font-bold text-lg"> Consultation GRH</span>
         </div>
     </ng-template>
-  
-
-
-
+    <div class="containers" style="display: flex; justify-content: flex-end;">
+        <div class="row">
+            <div class="col-md-4 custom-text-right">
+                <div class="d-flex align-items-end text-left">
+                    <label for="masseSalariale" class="label-with-margin" style="font-size: 1.2em; font-weight: bold;">Masse Salariale :</label>
+                    <input id="masseSalariale" type="text" pInputText [disabled]="true" [(ngModel)]="masseSalariale" />
+                </div>
+            </div>
+            <div class="col-md-4 custom-text-right">
+                <div class="d-flex align-items-end">
+                    <label for="salairesMoyenne" class="label-with-margin">Salaires Moyenne :</label>
+                    <input id="salairesMoyenne" type="text" pInputText [disabled]="true" [(ngModel)]="salaireMoyenne" />
+                </div>
+            </div>
+            <div class="col-md-4 custom-text-right">
+                <div class="d-flex align-items-end">
+                    <label for="piramideAge" class="label-with-margin">Piramide Age :</label>
+                    <input id="piramideAge" type="text" pInputText [disabled]="true" [(ngModel)]="piramideAge" />
+                </div>
+            </div>
+        </div>
+    </div>
     <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" routerLink="/addcollab"></button>
+
+
 
     <p-table [value]="collaborateursDto">
         <ng-template pTemplate="header">
@@ -33,9 +53,14 @@
                 <td>{{ collaborateursDto.type}}</td>
                 <td>{{ collaborateursDto.anneeExperience}}</td>
                 <td>
-                    <button pButton pRipple type="button" label="Afficher" class="p-button-text"></button>
-                    <button pButton pRipple type="button" label="Modifier" class="p-button-warning p-button-text"></button>
-                    <button pButton pRipple type="button" label="Supprimer" class="p-button-danger p-button-text" (click)="supprimerCollaborateur(collaborateursDto.id)"></button>
+                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-primary" ></button>                    
+                    <button pButton pRipple icon="pi pi-pencil"class="p-button-rounded p-button-success mr-2" ></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="supprimerCollaborateur(collaborateursDto.id)"></button>
+                    <button pButton pRipple icon="pi pi-print" class="p-button-rounded p-button-danger" ></button>
+
+           
+
+                  
 
                 </td>
             </tr>

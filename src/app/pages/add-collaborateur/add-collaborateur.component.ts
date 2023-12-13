@@ -29,6 +29,7 @@ export class AddCollaborateurComponent implements OnInit {
     private colService: CollaborateurService
   ) 
   {
+    
   }
 
   ngOnInit() {
@@ -136,23 +137,37 @@ export class AddCollaborateurComponent implements OnInit {
 
 
 
-  onSubmit(): void {
-    console.log('Tentative de soumission du formulaire...');
-    if (this.informations.valid) {
-      const formData = this.informations.value;
-      console.log('Données du formulaire:', formData); 
-      this.colService.ajouterCollaborateur(formData)
-        .subscribe((response) => {
-          console.log('Collaborateur ajouté avec succès:', response);
-        }, (error) => {
-          console.error('Erreur lors de l\'ajout du collaborateur:', error);
-        });
-    } else {
-      console.log('Formulaire invalide, vérifiez les champs.');
-    }
-    this.ngOnInit();
-  }
 
- 
+  // onSubmit(): void {
+  //   console.log('Tentative de soumission du formulaire...');
+  //   if (this.informations.valid) {
+  //     const formData = this.informations.value;
+  //     console.log('Données du formulaire:', formData); 
+  //     this.colService.addCollaborateur(formData)
+  //       .subscribe((response) => {
+  //         console.log('Collaborateur ajouté avec succès:', response);
+  //       }, (error) => {
+  //         console.error('Erreur lors de l\'ajout du collaborateur:', error);
+  //       });
+  //   } else {
+  //     console.log('Formulaire invalide, vérifiez les champs.');
+  //   }
+  //   this.ngOnInit();
+  // }
 
+
+  onSubmit() {
+    // const collaborateurData = this.informations.value;
+    // this.colService.addCollaborateur(collaborateurData).subscribe(
+    //   (response) => {
+    //     // Gérer la réponse de l'API si nécessaire
+    //     console.log('Collaborateur ajouté avec succès !', response);
+    //   },
+    //   (error) => {
+    //     // Gérer les erreurs ici
+    //     console.error('Erreur lors de l\'ajout du collaborateur :', error);
+    //   }
+    // );
+
+}
 }

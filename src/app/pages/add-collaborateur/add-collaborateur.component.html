@@ -8,7 +8,7 @@
             <div class="p-fluid p-formgrid p-grid">
               <div class="p-field p-col">
                 <label for="cin" class="form-label">Numéro CIN :</label>
-                <input type="number" id="cin" formControlName="cin" pInputText pattern="[0-9]{8}" title="Le CIN doit contenir exactement 8 chiffres" required/>
+                <input type="number" id="cin" formControlName="cin" pInputText />
               </div>
 
               <div class="p-field p-col">
@@ -284,7 +284,7 @@
         <div style="float: left; width: 40%">
           <div class="col-lg-6">
             <div class="p-fluid p-formgrid p-grid">
-              <div class="p-field p-col">
+              <!-- <div class="p-field p-col">
                 <label class="form-label">Recommandation :</label>
                 <div class="p-field-radiobutton">
                   <div class="p-radio">
@@ -308,7 +308,7 @@
                     <label for="recommandation2">Non</label>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <div class="p-field p-col">
                 <label for="collaborateur" class="form-label"
@@ -361,10 +361,8 @@
     [disabled]="!informations.valid"
     class="p-button-success" 
   ></button> -->
-  <!-- <button type="submit">Enregistrer</button> -->
   <button pButton pRipple type="button" label="Initialiser" class="p-button-secondary"></button>
-  <p-button label="Submit">Enregistrer</p-button>
+  <p-button type="submit">Enregistrer</p-button>
 
-  <p-button label="Enregistrer"></p-button>
 
 </form>

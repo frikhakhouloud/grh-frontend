@@ -30,9 +30,6 @@ getAvantage(): Observable<any> {
  getPoste(): Observable<any> {
   return this.http.get(`${this.baseUrl}/Poste/GetAll`);
  }
- ajouterCollaborateur(data: any) {
-  return this.http.post(this.apiUrl, data);
-}
 
 deleteCollaborateur(id: number): Observable<void> {
   const url = `${this.baseUrl}/Collaborateurs/Delete/${id}`;
@@ -47,6 +44,24 @@ deleteCollaborateur(id: number): Observable<void> {
 
     return this.http.get(`${this.baseUrl}/Collaborateurs/GetAllDto`);
   }
- 
+
+  // addCollaborateur(collaborateurData: any) {
+  //   return this.http.post('http://localhost:8081/Collaborateurs/add', collaborateurData);
+  // }
+  addCollaborateur(collaborateurData: any) {
+    return this.http.post(this.apiUrl, collaborateurData);
+  }
+
+  getSalairesMoyenne(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Collaborateurs/salairesMoyenne`);
+  }
+
+  getPiramideAge(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Collaborateurs/piramideAge`);
+  }
+
+  getMasseSalariale(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Collaborateurs/masseSalariale`);
+  }
   
 }

@@ -11,7 +11,9 @@ import { CollaborateurService } from 'src/app/Services/collaborateur.service';
 export class CollaborateurComponent implements OnInit {
   // collaborateurs: any[];
   collaborateursDto: any[];
-
+  salaireMoyenne:any[];
+  piramideAge:any[];
+  masseSalariale:any[];
   events: any[] = [
     { status: 'En cours', date: '2023-11-24' },
     { status: 'Terminé', date: '2023-11-20' },
@@ -22,15 +24,19 @@ export class CollaborateurComponent implements OnInit {
     ) { 
     // this.collaborateurs = [];
     this.collaborateursDto = [];
-
+    this.salaireMoyenne =[];  
+    this.piramideAge =[]; 
+    this.masseSalariale =[];
   }
 
   ngOnInit(): void {
 
     // this.getAllCollaborateurs();
     this.getAllCollaborateursDto();
+    this.getSalaireMoyenne();
+    this.getPiramideAge();
+    this.getMasseSalariale();
   }
-
 
   // getAllCollaborateurs() {
   //   this.colService
@@ -66,6 +72,24 @@ export class CollaborateurComponent implements OnInit {
         console.error('Erreur lors de la suppression du collaborateur : ', error);
       });
   }
+    getSalaireMoyenne(){
+  this.colService
+  .getSalairesMoyenne()
+  .subscribe((data) => (this.salaireMoyenne = data));
+    }
 
+    getPiramideAge(){
+      this.colService
+      .getPiramideAge()
+      .subscribe((data) => (this.piramideAge = data));
+        }
+   getMasseSalariale(){
+          this.colService
+          .getMasseSalariale()
+          .subscribe((data) => (this.masseSalariale = data));
+            }
+        
+    
+ 
  
 }
