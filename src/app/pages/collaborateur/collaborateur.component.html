@@ -32,7 +32,8 @@
 
     <p-toast ></p-toast>
 
-    <p-table [value]="collaborateursDto">
+    <p-table [value]="collaborateursDto"  [paginator]="true"
+    [rows]="5"  [rowsPerPageOptions]="[4, 6, 10]">
         <ng-template pTemplate="header">
             <tr>
                 
