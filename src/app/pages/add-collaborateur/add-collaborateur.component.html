@@ -132,8 +132,9 @@
                 >
                 <p-dropdown
                   [options]="niveauEtude"
-                  formControlName="niveauEtude"
+                  formControlName="idNiveauEtude"
                   optionLabel="niveauEtude"
+                  optionValue="id"
                   placeholder="Sélectionnez un niveau"
                 ></p-dropdown>
               </div>
@@ -167,8 +168,9 @@
                   >Type contrat :</label>
                 <p-dropdown
                   [options]="contratType"
-                  formControlName="contratType"
+                  formControlName="idTypeContrat"
                   optionLabel="type"
+                  optionValue="id"
                   placeholder="Sélectionnez un type"
                 ></p-dropdown>
               </div>
@@ -177,9 +179,10 @@
                 <label for="avantagesSalaire" class="form-label"
                   >Avantages sur le salaire :</label>
                 <p-dropdown
-                  [options]="avantagesSalaire"
-                  formControlName="avantagesSalaire"
+                  [options]="avantage"
+                  formControlName="idAvantageSalaire"
                   optionLabel="avantage"
+                  optionValue="id"
                   placeholder="Sélectionnez un avantage"
                 ></p-dropdown>
               </div>
@@ -232,8 +235,9 @@
                 >
                 <p-dropdown
                   [options]="departement"
-                  formControlName="departement"
+                  formControlName="idDepartement"
                   optionLabel="nomDepartament"
+                  optionValue="id"
                   placeholder="Sélectionnez un département"
                 ></p-dropdown>
                 <!-- <p-dropdown [options]="departement" formControlName="departement" placeholder="Sélectionnez un département"
@@ -245,8 +249,9 @@
                 >
                 <p-dropdown
                   [options]="responsable"
-                  formControlName="responsable"
+                  formControlName="idResponsable"
                   optionLabel="nomResponsable"
+                  optionValue="id"
                   placeholder="Sélectionnez un responsable"
                 ></p-dropdown>
               </div>
@@ -260,8 +265,9 @@
                 <label for="poste" class="form-label">Poste :</label>
                 <p-dropdown
                   [options]="poste"
-                  formControlName="poste"
+                  formControlName="idPoste"
                   optionLabel="poste"
+                  optionValue="id"
                   placeholder="Sélectionnez un poste"
                 ></p-dropdown>
               </div>
@@ -347,22 +353,9 @@
     </p-toolbar>
   </p-panel>
 
-  <!-- <button
-    type="button"
-    pButton
-    label="Réinitialiser"
-    class="p-button-secondary"
-  ></button> -->
+  
  
-  <!-- <button
-    type="submit"
-    pButton
-    label="Enregistrer"
-    [disabled]="!informations.valid"
-    class="p-button-success" 
-  ></button> -->
   <button pButton pRipple type="button" label="Initialiser" class="p-button-secondary"></button>
   <p-button type="submit">Enregistrer</p-button>
-
 
 </form>

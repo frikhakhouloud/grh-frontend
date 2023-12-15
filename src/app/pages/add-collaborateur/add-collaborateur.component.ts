@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { CollaborateurService } from 'src/app/Services/collaborateur.service';
 
 @Component({
@@ -12,25 +10,19 @@ import { CollaborateurService } from 'src/app/Services/collaborateur.service';
   styleUrls: ['./add-collaborateur.component.css'],
 })
 export class AddCollaborateurComponent implements OnInit {
- 
- 
-  informations!: FormGroup; 
+  informations!: FormGroup;
   date: Date | undefined;
-  niveauEtude: any[]= [''];
-  contratType: any[]= [''];
-  avantagesSalaire: any[]= [''];
-  departement :any[]= [''];
-  responsable :any[]= [''];
-  poste :any
-
+  niveauEtude: any[] = [''];
+  contratType: any[] = [''];
+  avantage: any[] = [''];
+  departement: any[] = [''];
+  responsable: any[] = [''];
+  poste: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private colService: CollaborateurService
-  ) 
-  {
-    
-  }
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -41,8 +33,6 @@ export class AddCollaborateurComponent implements OnInit {
     this.getResponsable();
     this.getPoste();
 
-   
-  
     // this.poste = [
     //   { label: 'développement', value: 'développement' },
     //   { label: 'test et qualité', value: 'test et qualité' },
@@ -50,56 +40,46 @@ export class AddCollaborateurComponent implements OnInit {
     // ];
   }
 
-
-
   createForm(): void {
-      this.informations = this.formBuilder.group({
-        cin: ['', Validators.required],
-        nom: ['', Validators.required],
-        numCompte: ['', Validators.required],
-        numSecSocial: ['', Validators.required],
-        telephone: ['', Validators.required],
-        dateNaissance: [null, ],
-        email: ['', [Validators.required, Validators.email]],
-        adresse: ['', Validators.required],
-        natureEtude: [''],
-        certification: [''],
-        anneeExperience: [''],
-
-          niveauEtude: [''],
-          contratType: ['', ],
-          salaireBase: [null],
-          avantagesSalaire: ['',],
-          dateDebutContrat: [null],
-          departement: [''],
-          poste: [''],
-          responsable: [''],
-          recommandation: [''],
-          collaborateur: [''],
-          commentaire: [''],
-          date: [''],
-        });
-    }
-
-
- 
+    this.informations = this.formBuilder.group({
+      cin: [''],
+      nom: [''],
+      numCompte: [''],
+      numSecSocial: [''],
+      telephone: [''],
+      dateNaissance: [null],
+      email: [''],
+      adresse: [''],
+      natureEtude: [''],
+      certification: [''],
+      anneeExperience: [''],
+      idNiveauEtude: [''],
+      idTypeContrat: [''],
+      salaireBase: [null],
+      idAvantageSalaire: [''],
+      dateDebutContrat: [null],
+      idDepartement: [''],
+      idPoste: [''],
+      idResponsable: [''],
+      recommandation: [''],
+      collaborateur: [''],
+      commentaire: [''],
+      date: [''],
+    });
+  }
 
   getNiveauxEtude() {
-    this.colService
-      .getNiveauE()
-      .subscribe((data) => (this.niveauEtude = data));
+    this.colService.getNiveauE().subscribe((data) => (this.niveauEtude = data));
   }
 
   getContrat() {
-    this.colService
-      .getContrat()
-      .subscribe((data) => (this.contratType = data));
+    this.colService.getContrat().subscribe((data) => (this.contratType = data));
   }
 
   getAvantage() {
     this.colService
       .getAvantage()
-      .subscribe((data) => (this.avantagesSalaire = data));
+      .subscribe((data) => (this.avantage = data));
   }
 
   getDepartement() {
@@ -113,9 +93,7 @@ export class AddCollaborateurComponent implements OnInit {
       .subscribe((data) => (this.responsable = data));
   }
   getPoste() {
-    this.colService
-      .getPoste()
-      .subscribe((data) => (this.poste = data));
+    this.colService.getPoste().subscribe((data) => (this.poste = data));
   }
 
   // onDepartementChange(event: any) {
@@ -126,48 +104,33 @@ export class AddCollaborateurComponent implements OnInit {
   //     ];
   //   }
   //   if(event.value==='Ressources humaines'){
-       
+
   //         this.poste = [
-     
+
   //     { label: 'Help Desk', value: 'Help Desk' },
   //   ];
   // }}
 
+ 
 
+  onSubmit(): void {
+    console.log('Tentative de soumission du formulaire...');
+    if (this.informations.valid) {
+      const formData = this.informations.value;
+      console.log('Données du formulaire:', formData);
+      this.colService.addCollaborateur(formData).subscribe(
+        (response) => {
+          console.log('Collaborateur ajouté avec succès:', response);
+        },
+        (error) => {
+          console.error("Erreur lors de l'ajout du collaborateur:", error);
+        }
+      );
+    } else {
+      console.log('Formulaire invalide, vérifiez les champs.');
+    }
+    this.ngOnInit();
+  }
 
-
-
-
-  // onSubmit(): void {
-  //   console.log('Tentative de soumission du formulaire...');
-  //   if (this.informations.valid) {
-  //     const formData = this.informations.value;
-  //     console.log('Données du formulaire:', formData); 
-  //     this.colService.addCollaborateur(formData)
-  //       .subscribe((response) => {
-  //         console.log('Collaborateur ajouté avec succès:', response);
-  //       }, (error) => {
-  //         console.error('Erreur lors de l\'ajout du collaborateur:', error);
-  //       });
-  //   } else {
-  //     console.log('Formulaire invalide, vérifiez les champs.');
-  //   }
-  //   this.ngOnInit();
-  // }
-
-
-  onSubmit() {
-    // const collaborateurData = this.informations.value;
-    // this.colService.addCollaborateur(collaborateurData).subscribe(
-    //   (response) => {
-    //     // Gérer la réponse de l'API si nécessaire
-    //     console.log('Collaborateur ajouté avec succès !', response);
-    //   },
-    //   (error) => {
-    //     // Gérer les erreurs ici
-    //     console.error('Erreur lors de l\'ajout du collaborateur :', error);
-    //   }
-    // );
-
-}
+  
 }

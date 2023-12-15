@@ -45,9 +45,7 @@ deleteCollaborateur(id: number): Observable<void> {
     return this.http.get(`${this.baseUrl}/Collaborateurs/GetAllDto`);
   }
 
-  // addCollaborateur(collaborateurData: any) {
-  //   return this.http.post('http://localhost:8081/Collaborateurs/add', collaborateurData);
-  // }
+  
   addCollaborateur(collaborateurData: any) {
     return this.http.post(this.apiUrl, collaborateurData);
   }
@@ -63,5 +61,7 @@ deleteCollaborateur(id: number): Observable<void> {
   getMasseSalariale(): Observable<any> {
     return this.http.get(`${this.baseUrl}/Collaborateurs/masseSalariale`);
   }
-  
+  getJasper(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Collaborateurs/generateReport/${id}`, { responseType: 'blob' });
+   }
 }
