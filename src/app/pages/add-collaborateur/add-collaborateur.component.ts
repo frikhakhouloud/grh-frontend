@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CollaborateurService } from 'src/app/Services/collaborateur.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-collaborateur',
   templateUrl: './add-collaborateur.component.html',
   providers: [MessageService],
   styleUrls: ['./add-collaborateur.component.css'],
+
 })
 export class AddCollaborateurComponent implements OnInit {
   informations!: FormGroup;
@@ -18,13 +21,19 @@ export class AddCollaborateurComponent implements OnInit {
   departement: any[] = [''];
   responsable: any[] = [''];
   poste: any;
+  collab:any
+  idStorage:any
+  isUpdated=false
 
   constructor(
     private formBuilder: FormBuilder,
-    private colService: CollaborateurService
+    private messageService: MessageService,
+    private colService: CollaborateurService,
+    private router:Router
   ) {}
 
   ngOnInit() {
+    
     this.createForm();
     this.getNiveauxEtude();
     this.getContrat();
@@ -32,14 +41,44 @@ export class AddCollaborateurComponent implements OnInit {
     this.getDepartement();
     this.getResponsable();
     this.getPoste();
+    this.getCollab();
+    if (window.localStorage.getItem("operation")=="SHOW") {
+      this.informations.disable()
+      
+    }
 
-    // this.poste = [
-    //   { label: 'développement', value: 'développement' },
-    //   { label: 'test et qualité', value: 'test et qualité' },
-    //   { label: 'Help Desk', value: 'Help Desk' },
-    // ];
   }
-
+  show() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Collaborateur is added' });
+  }
+  getCollab() {
+    let idStorage = window.localStorage.getItem("idA");
+    this.colService.getCollaborateur(idStorage).subscribe(data => {
+      this.collab = data;
+      this.informations.patchValue({
+        cin: data.cin,
+        nom: data.nom,
+        numCompte: data.numCompte,
+        numSecSocial: data.numSecSocial,
+        telephone: data.telephone,
+        dateNaissance: new Date(data.dateNaissance) ,
+        email: data.email,
+        adresse: data.adresse,
+        natureEtude:data.natureEtude,
+        certification: data.certification,
+        anneeExperience: data.anneeExperience,
+        idNiveauEtude:data.idNiveauEtude,
+        idTypeContrat:data.idTypeContrat,
+        salaireBase:data.salaireBase,
+        idAvantageSalaire:data.idAvantageSalaire,
+        dateDebutContrat:new Date(data.dateNaissance),
+        idDepartement:data.idDepartement,
+        idPoste:data.idPoste,
+        idResponsable:data.idResponsable,
+      });
+      console.log(data);
+    });
+  }
   createForm(): void {
     this.informations = this.formBuilder.group({
       cin: [''],
@@ -96,21 +135,6 @@ export class AddCollaborateurComponent implements OnInit {
     this.colService.getPoste().subscribe((data) => (this.poste = data));
   }
 
-  // onDepartementChange(event: any) {
-  //   if(event.value==='Informatique'){
-  //     this.poste = [
-  //       { label: 'développement', value: 'développement' },
-  //       { label: 'test et qualité', value: 'test et qualité' }
-  //     ];
-  //   }
-  //   if(event.value==='Ressources humaines'){
-
-  //         this.poste = [
-
-  //     { label: 'Help Desk', value: 'Help Desk' },
-  //   ];
-  // }}
-
  
 
   onSubmit(): void {
@@ -120,7 +144,11 @@ export class AddCollaborateurComponent implements OnInit {
       console.log('Données du formulaire:', formData);
       this.colService.addCollaborateur(formData).subscribe(
         (response) => {
+          this.show();
           console.log('Collaborateur ajouté avec succès:', response);
+          setTimeout(() => {
+            this.router.navigate(['/collaborateur']);
+          }, 1500);
         },
         (error) => {
           console.error("Erreur lors de l'ajout du collaborateur:", error);
@@ -130,6 +158,40 @@ export class AddCollaborateurComponent implements OnInit {
       console.log('Formulaire invalide, vérifiez les champs.');
     }
     this.ngOnInit();
+  }
+
+  onEdit(): void {
+    console.log('Tentative de soumission du formulaire...');
+    if (this.informations.valid) {
+      const formData = this.informations.value;
+      console.log('Données du formulaire:', formData);
+      const collaborateurId = this.collab.id;
+      this.colService.updateCollaborateur(formData, collaborateurId).subscribe(
+        (response) => {
+          this.show();
+          console.log('Collaborateur modifié avec succès:', response);
+          setTimeout(() => {
+            this.router.navigate(['/collaborateur']);
+          }, 1500);
+        },
+        (error) => {
+          console.error("Erreur lors de la modification du collaborateur:", error);
+        }
+      );
+    } else {
+      console.log('Formulaire invalide, vérifiez les champs.');
+    }
+    this.ngOnInit();
+  }
+
+  onSubmitAction(){
+    if (window.localStorage.getItem("operation")=="EDIT") {
+      this.onEdit()
+    } else if (window.localStorage.getItem("operation")=="CREATE") {
+      this.onSubmit();
+    }
+    this.ngOnInit();
+
   }
 
   

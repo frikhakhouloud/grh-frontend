@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" routerLink="/addcollab"></button>
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="newCollab()"></button>
 
     <p-toast ></p-toast>
 
@@ -54,8 +54,8 @@
                 <td>{{ collaborateursDto.type}}</td>
                 <td>{{ collaborateursDto.anneeExperience}}</td>
                 <td>
-                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-primary" ></button>                    
-                    <button pButton pRipple icon="pi pi-pencil"class="p-button-rounded p-button-success mr-2" ></button>
+                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-primary" (click)="afficherId(collaborateursDto.id)"></button>                    
+                    <button pButton pRipple icon="pi pi-pencil"class="p-button-rounded p-button-success mr-2" (click)="saveId(collaborateursDto.id)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="supprimerCollaborateur(collaborateursDto.id)"></button>
                     <button pButton pRipple icon="pi pi-print" class="p-button-rounded p-button-danger" (click)="getJasper(collaborateursDto.id)" ></button>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CollaborateurService } from 'src/app/Services/collaborateur.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collaborateur',
@@ -23,16 +24,16 @@ export class CollaborateurComponent implements OnInit {
   ];
 
   constructor(
-    private http: HttpClient,
     private messageService: MessageService,
-    private colService: CollaborateurService
+    private colService: CollaborateurService,
+    private router: Router
   ) {
     // this.collaborateurs = [];
     this.collaborateursDto = [];
     this.salaireMoyenne = [];
     this.piramideAge = [];
     this.masseSalariale = [];
-    this.jasper= [];
+    this.jasper = [];
   }
 
   ngOnInit(): void {
@@ -107,17 +108,43 @@ export class CollaborateurComponent implements OnInit {
       .getMasseSalariale()
       .subscribe((data) => (this.masseSalariale = data));
   }
-
+  saveId(id: any) {
+    window.localStorage.removeItem(id);
+    localStorage.setItem('idA', id);
+    localStorage.setItem('operation', 'EDIT');
+    this.router.navigate(['/addcollab']);
+  }
+  afficherId(id: any) {
+    window.localStorage.removeItem(id);
+    localStorage.setItem('idA', id);
+    localStorage.setItem('operation', 'SHOW');
+    this.router.navigate(['/addcollab']);
+  }
   getJasper(id: number): void {
-    this.colService.getJasper(id) .subscribe((data) => {this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'report is downloaded', life: 4000 });
-  },
-  (error) => {
-    console.error('Error downloading report:', error);
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'an erreur is occured' });
+    this.colService.getJasper(id).subscribe(
+      (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'report is downloaded',
+          life: 4000,
+        });
+      },
+      (error) => {
+        console.error('Error downloading report:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'an erreur is occured',
+        });
+      }
+    );
+  }
+
+  newCollab(){
+    this.router.navigate(['/addcollab']);
+    localStorage.setItem('operation', 'CREATE');
+    localStorage.removeItem('idA');
 
   }
-);
-}
-
-
 }
