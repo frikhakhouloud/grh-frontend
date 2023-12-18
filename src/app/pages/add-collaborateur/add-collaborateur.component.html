@@ -278,11 +278,13 @@
     </p-toolbar>
   </p-panel>
 
-  <!-- <p-panel header="Pièces jointes">
+  <p-panel header="Pièces jointes">
     <p-toolbar styleClass="mb-4">
-      <ng-template pTemplate="left"> </ng-template>
+      <ng-template pTemplate="left">
+        <app-upload-files></app-upload-files>
+      </ng-template>
     </p-toolbar>
-  </p-panel> -->
+  </p-panel>
 
   <p-panel header="Autres informations">
     <p-toolbar styleClass="mb-4">
@@ -353,9 +355,10 @@
     </p-toolbar>
   </p-panel>
 
-  
+  <!-- <p-button label="initialiser" severity="danger" (click)="reset()" style="margin-right: 50px;"></p-button> -->
+
  
-  <button pButton pRipple type="button" label="Initialiser" class="p-button-secondary"></button>
+  <button pButton pRipple type="button" label="Initialiser" class="p-button-secondary" (click)="reset()"></button>
   <!-- <p-button type="submit">Enregistrer</p-button> -->
     <p-button type="submit">Enregistrer</p-button>
   <p-toast></p-toast>

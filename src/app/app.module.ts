@@ -4,7 +4,6 @@ import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { CollaborateurComponent } from './pages/collaborateur/collaborateur.component';
 import { TimelineModule } from 'primeng/timeline';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -30,6 +29,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { AjoutCollabComponent } from './pages/ajout-collab/ajout-collab.component';
 
 
+import { AppComponent } from './app.component';
+import { UploadFilesComponent } from './components/upload-files/upload-files.component';
 @NgModule({
   
   declarations: [
@@ -37,6 +38,7 @@ import { AjoutCollabComponent } from './pages/ajout-collab/ajout-collab.componen
     CollaborateurComponent,
     AddCollaborateurComponent,
     AjoutCollabComponent,
+    UploadFilesComponent,
   ],
   imports: [
     BrowserModule,

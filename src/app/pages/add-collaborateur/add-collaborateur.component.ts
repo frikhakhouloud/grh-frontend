@@ -193,6 +193,9 @@ export class AddCollaborateurComponent implements OnInit {
     this.ngOnInit();
 
   }
-
-  
+  reset(){
+    this.informations.reset()
+    window.scroll(0, 0);
+  }
+   
 }
